@@ -1,7 +1,10 @@
 import tkinter as tk
+from data_api import return_weather_data
 
 def get_id(city, window):
     #få dictionary av forslag fra API
+
+    #sender navn, får to koordinater
 
     example_suggestions_main = [
         {"name": "Oslo, NO", "id": 12345},
@@ -38,3 +41,13 @@ def get_id(city, window):
 
     window.wait_variable(selected_id)
     return selected_id.get()
+
+def info_box(lan, lon, window):
+    info_frame = tk.Frame(window)
+
+    weather_data = return_weather_data(lan, lon)
+    weather_info = weather_data["weather_info"]
+
+    print(weather_info)
+
+    info_frame.pack(side="right", anchor='ne')

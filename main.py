@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter_functions import get_id
+from tkinter_functions import get_id, info_box
 
 window = tk.Tk()
 window.title('Å være eller ikke være')
@@ -8,8 +8,8 @@ window_width = 1000
 window_height = 650
 
 #deklarerer globale id-variabler
-main_id = 0
-comparison_id = 0
+main_id = []
+comparison_id = []
 
 #container til input for å midtstille
 input_container = tk.Frame(window)
@@ -56,6 +56,8 @@ input_container.pack(side="left", anchor='nw', padx=10, pady=10)
 
 window.geometry(f"{window_width}x{window_height}")
 
-
 #kjører vinduet
+
+#info_box(main_id[0], main_id[1], window)
+
 window.mainloop()
