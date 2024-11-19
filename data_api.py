@@ -113,7 +113,7 @@ def print_weather_info(weather_info):
                 result += f"  | {sub_key:5}:  {sub_value}\n"
         else:
             result += f"{key:10}:  {value}\n"
-        
+            
         result += "-" * 35 + "\n"
     
     result += "\n\n"
