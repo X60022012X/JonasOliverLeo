@@ -82,22 +82,22 @@ def render_data(data_forkast):
       "wind_direction": []
     }
 
-  for i in data_forkast["list"]:
-    weather_data["clouds"].append(i.get("clouds", {}).get("all", None))
-    weather_data["time"].append(i.get("dt_txt", None))
-    weather_data["atmospheric_pressure_at_ground_level"].append(i.get("main", {}).get("grnd_level", None))
-    weather_data["atmospheric_pressure_at_sea_level"].append(i.get("main", {}).get("pressure", None))
-    weather_data["sea_level_pressure"].append(i.get("main", {}).get("sea_level", None))
-    weather_data["humidity"].append(i.get("main", {}).get("humidity", None))
-    weather_data["temperature"].append(i.get("main", {}).get("temp", None))
-    weather_data["min_temperature"].append(i.get("main", {}).get("temp_min", None))
-    weather_data["max_temperature"].append(i.get("main", {}).get("temp_max", None))
-    weather_data["feels_like"].append(i.get("main", {}).get("feels_like", None))
-    weather_data["probability_of_precipitation"].append(i.get("pop", None))
-    weather_data["visibility"].append(i.get("visibility", None))
-    weather_data["wind_gust_speed"].append(i.get("wind", {}).get("gust", None))
-    weather_data["wind_speed"].append(i.get("wind", {}).get("speed", None))
-    weather_data["wind_direction"].append(i.get("wind", {}).get("deg", None))
+    for i in data_forkast["list"]:
+        weather_data["clouds"].append(i.get("clouds", {}).get("all", None))
+        weather_data["time"].append(i.get("dt_txt", None))
+        weather_data["atmospheric_pressure_at_ground_level"].append(i.get("main", {}).get("grnd_level", None))
+        weather_data["atmospheric_pressure_at_sea_level"].append(i.get("main", {}).get("pressure", None))
+        weather_data["sea_level_pressure"].append(i.get("main", {}).get("sea_level", None))
+        weather_data["humidity"].append(i.get("main", {}).get("humidity", None))
+        weather_data["temperature"].append(i.get("main", {}).get("temp", None))
+        weather_data["min_temperature"].append(i.get("main", {}).get("temp_min", None))
+        weather_data["max_temperature"].append(i.get("main", {}).get("temp_max", None))
+        weather_data["feels_like"].append(i.get("main", {}).get("feels_like", None))
+        weather_data["probability_of_precipitation"].append(i.get("pop", None))
+        weather_data["visibility"].append(i.get("visibility", None))
+        weather_data["wind_gust_speed"].append(i.get("wind", {}).get("gust", None))
+        weather_data["wind_speed"].append(i.get("wind", {}).get("speed", None))
+        weather_data["wind_direction"].append(i.get("wind", {}).get("deg", None))
 
     return weather_data
 
