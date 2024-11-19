@@ -20,15 +20,17 @@ def get_suggestion(city):
         else:
             temp_dict["place"] = f"{i['name']}, {i['country']}"
 
-        temp_dict["coordinates"] = f"{i['lat']}, {i['lon']}"
+        temp_dict["coordinates"] = [i['lat'], i['lon']]
         
         # Append each dictionary to a list
         suggestions.append(temp_dict)
 
     # Print all collected suggestions
-    pprint(suggestions)
+    #pprint(suggestions)
+
+    return suggestions
 
     # Optionally, print the raw response data
-    pprint(data_direct)
+    #pprint(data_direct)
 
-get_suggestion("Oslo")
+#get_suggestion("Oslo")

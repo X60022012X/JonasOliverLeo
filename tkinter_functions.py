@@ -1,21 +1,15 @@
 import tkinter as tk
 from data_api import return_weather_data
+from direct_api import get_suggestion
 
 def get_id(city, window):
     #få dictionary av forslag fra API
 
     #sender navn, får to koordinater
 
-    example_suggestions_main = [
-        {"name": "Oslo, NO", "id": 12345},
-        {"name": "Berlin, DE", "id": 67890},
-        {"name": "Paris, FR", "id": 54321},
-        {"name": "Tokyo, JP", "id": 98765},
-        {"name": "New York, US", "id": 45678},
-        {"name": "Sydney, AU", "id": 19283}
-    ] #skal byttes ut med liste over mulige steder, returnert fra api
+    suggestions = get_suggestion(city)
 
-    selected_id = tk.IntVar()
+    selected_id = tk.StringVar()
 
     suggestion_frame = tk.Frame(window, background='lightgray', padx=10, pady=10)
     suggestion_question = tk.Label(suggestion_frame,
@@ -26,13 +20,13 @@ def get_id(city, window):
     suggestion_question.pack()
 
     #lager selve knappene
-    for elm in example_suggestions_main:
+    for elm in suggestions:
         suggestion = tk.Button(suggestion_frame,
-                               text=elm['name'],
+                               text=elm['place'],
                                width=20,
                                padx=10,
                                pady=10,
-                               command = lambda x=elm['id']: (selected_id.set(x), suggestion_frame.destroy()) #lagrer riktig id
+                               command = lambda x=elm['coordinates']: (selected_id.set(x), suggestion_frame.destroy()) #lagrer riktig id
         )
         suggestion.pack()
 

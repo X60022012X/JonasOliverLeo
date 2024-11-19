@@ -46,6 +46,7 @@ def enter_btn_func():
     global comparison_id
     main_id = get_id(main_city_input.get(), window)
     comparison_id = get_id(comparison_city_input.get(), window)
+    print(main_id, comparison_id)
 
 #enter knapp
 enter_btn = tk.Button(input_container,
