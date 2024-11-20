@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 from datetime import datetime
-from data_api import return_weather_data
+from data_api import return_city_weather_data
 
 def format_time_labels(time_data):
     """
@@ -26,13 +26,13 @@ def create_and_return_graphs(main_id, comparison_id=None):
     """
     lat1, lon1 = main_id
     # Hent værdata for første by
-    weather_data1 = return_weather_data(lat1, lon1)["weather_data"]
+    weather_data1 = return_city_weather_data(lat1, lon1)
     time = format_time_labels(weather_data1['time'])
 
     # Sjekk om vi har en annen by for sammenlikning
     if comparison_id:
         lat2, lon2 = comparison_id
-        weather_data2 = return_weather_data(lat2, lon2)["weather_data"]
+        weather_data2 = return_city_weather_data(lat2, lon2)
 
     # Opprett figurer
     figures = []
