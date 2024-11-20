@@ -58,7 +58,7 @@ def info_box(main_coordinates, comparison_coordinates, window):
     data = [
         ("Population:", main_weather_info['population'], comparison_weather_info['population']),
         ("Land:", main_weather_info['country'], comparison_weather_info['country']),
-        ("Timezone:", main_weather_info['timezone'], comparison_weather_info['timezone']['UTC'])
+        ("Timezone:", main_weather_info['timezone']['UTC'], comparison_weather_info['timezone']['UTC'])
     ]
 
     # Configure grid layout for uniform spacing
