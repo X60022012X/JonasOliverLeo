@@ -1,5 +1,5 @@
 import tkinter as tk
-from data_api import return_weather_data
+from data_api import return_city_info, return_city_weather_data
 from direct_api import get_suggestion
 import ast
 from math import floor
@@ -49,8 +49,8 @@ def info_box(main_coordinates, comparison_coordinates, window):
     info_frame = tk.Frame(window, bg='lightgray')
     
     # Fetch weather data (assuming return_weather_data is defined elsewhere)
-    main_weather_info = return_weather_data(main_coordinates[0], main_coordinates[1])['weather_info']
-    comparison_weather_info = return_weather_data(comparison_coordinates[0], comparison_coordinates[1])['weather_info']
+    main_weather_info = return_city_info(main_coordinates[0], main_coordinates[1])
+    comparison_weather_info = return_city_info(comparison_coordinates[0], comparison_coordinates[1])
     print('main:', main_weather_info)
     print('comparison:', comparison_weather_info)
 
