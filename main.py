@@ -44,7 +44,7 @@ comparison_city_wigdet = tk.Entry(input_container,
                                   borderwidth=10,
                                   relief=tk.FLAT,
                                   textvariable=comparison_city_input)
-comparison_city_wigdet.insert(index=0, string='Lom')
+comparison_city_wigdet.insert(index=0, string='Houston')
 comparison_city_wigdet.pack(side="left")
 
 
@@ -70,10 +70,6 @@ def enter_btn_func():
     figures = create_and_return_graphs(main_city_input.get(), comparison_city_input.get(), main_id, comparison_id)
     
     figure_frame(figures, window)
-
-    # for fig in figures:
-    #     fig.show()
-    # plt.show()
 
 #enter knapp
 enter_btn = tk.Button(input_container,

@@ -110,6 +110,10 @@ def info_box(window, main_city, comparison_city=None):
     # Pack the frame to the right of the window
     info_frame.pack(side="right", anchor='ne', expand=True, padx=90, pady=10)
 
+
+
+
+
 def figure_frame(figures, window):
     current_index = 0
     def next_index():
@@ -120,6 +124,13 @@ def figure_frame(figures, window):
         nonlocal current_index
         current_index = (current_index - 1) % len(figures)
 
+    graph_frame = tk.Frame(window, width=800, height=600, bg='black')  # Width and height can be adjusted
+    graph_frame.pack()
+    graph_frame.place(x=5, y=130)
+
+    canvas_frame = tk.Frame(graph_frame)
+    canvas_frame.pack(side='bottom', fill='both', expand=True)
+
     def draw_graph(figure, canvas_frame):
         for child in canvas_frame.winfo_children():
             child.destroy()
@@ -129,30 +140,24 @@ def figure_frame(figures, window):
         canvas.draw()
         canvas.get_tk_widget().pack()
 
-        toolbar = NavigationToolbar2Tk(canvas, master=canvas_frame)
+        toolbar = NavigationToolbar2Tk(canvas)
 
         toolbar.update()
+        toolbar.pack(side='bottom', fill='x')
 
-        canvas.get_tk_widget().pack()
+        canvas.get_tk_widget().pack(side='bottom', anchor='sw', fill='both', expand=True)
 
-    graph_frame = tk.Frame(window)
-
-    canvas_frame = tk.Frame(graph_frame)
-    canvas_frame.pack(side='bottom', fill='both', expand=True)
+    
 
     next_graph_btn = tk.Button(graph_frame,
                                text='Neste',
                                command=lambda: (next_index(), draw_graph(figures[current_index], canvas_frame)))
-    next_graph_btn.pack(side='right',
-                        anchor='ne')
+    next_graph_btn.pack(side='right', padx=5, pady=5)
     
     prev_graph_btn = tk.Button(graph_frame,
                                text='Forrige',
                                command=lambda: (prev_index(), draw_graph(figures[current_index], canvas_frame)))
-    prev_graph_btn.pack(side='left',
-                        anchor='nw')
+    prev_graph_btn.pack(side='left', padx=5, pady=5)
 
+    graph_frame.config(height=200, width=300)
     draw_graph(figures[current_index], canvas_frame)
-
-    graph_frame.pack(side='left',
-                     anchor='sw')

@@ -14,6 +14,9 @@ def format_time_labels(time_data):
     return formatted_times
 
 def create_and_return_graphs(main_name, comparison_name, main_id, comparison_id=None):
+
+    figsize = (7, 5)
+    dpi = 90
     """
     Oppretter og returnerer fire vær-relaterte grafer med data fra en eller to steder.
 
@@ -38,7 +41,7 @@ def create_and_return_graphs(main_name, comparison_name, main_id, comparison_id=
     figures = []
 
     # Temperatur og følt temperatur graf
-    fig1, ax1 = plt.subplots(figsize=(10, 6))
+    fig1, ax1 = plt.subplots(figsize=figsize, dpi = dpi)
     ax1.plot(time, weather_data1['temperature'], marker='o', markersize=4, color='r', linestyle='-', label=f"Temperatur, {main_name}")
     ax1.plot(time, weather_data1['feels_like'], marker='o', markersize=4, color='r', linestyle='--', label=f"Føles som, {main_name}", alpha=0.7)
     
@@ -57,7 +60,7 @@ def create_and_return_graphs(main_name, comparison_name, main_id, comparison_id=
     figures.append(fig1)
 
     # Fuktighet graf
-    fig2, ax2 = plt.subplots(figsize=(10, 6))
+    fig2, ax2 = plt.subplots(figsize=figsize, dpi = dpi)
     ax2.plot(time, weather_data1['humidity'], marker='o', markersize=4, color='b', linestyle='-', label=f"Luftfuktighet, {main_name}")
 
     if comparison_id:
@@ -74,7 +77,7 @@ def create_and_return_graphs(main_name, comparison_name, main_id, comparison_id=
     figures.append(fig2)
 
     # Vindhastighet graf
-    fig3, ax3 = plt.subplots(figsize=(10, 6))
+    fig3, ax3 = plt.subplots(figsize=figsize, dpi = dpi)
     ax3.plot(time, weather_data1['wind_speed'], marker='o', markersize=4, color='g', linestyle='-', label=f"Vind, {main_name}")
 
     if comparison_id:
@@ -91,7 +94,7 @@ def create_and_return_graphs(main_name, comparison_name, main_id, comparison_id=
     figures.append(fig3)
 
     # Skydekke graf
-    fig4, ax4 = plt.subplots(figsize=(10, 6))
+    fig4, ax4 = plt.subplots(figsize=figsize, dpi = dpi)
     ax4.plot(time, weather_data1['clouds'], marker='o', markersize=4, color='purple', linestyle='-', label=f"Skydekke, {main_name}")
 
     if comparison_id:
@@ -112,11 +115,11 @@ def create_and_return_graphs(main_name, comparison_name, main_id, comparison_id=
 # Test case 
 if __name__ == "__main__":
     
-    main_id = (59.91, 10.75)  
-    comparison_id = (57.90, 11.22)  
+    main_id = 'London, England, GB'
+    comparison_id = 'Houston, Texas, US'
 
     # Kaller graf-funksjonen
-    graphs = create_and_return_graphs('navn1', 'navn2', main_id, comparison_id)
+    graphs = create_and_return_graphs('London', 'Houston', main_id, comparison_id)
 
     # Viser hver graf i hvert sitt vindu
     for fig in graphs:
