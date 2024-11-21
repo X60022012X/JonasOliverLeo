@@ -59,13 +59,13 @@ def info_box(window, main_city, comparison_city=None):
         data = [
             ("Befolkning:", main_weather_info['population'], comparison_weather_info['population']),
             ("Land:", main_weather_info['country'], comparison_weather_info['country']),
-            ("Timezone:", main_weather_info['timezone']['UTC'], comparison_weather_info['timezone']['UTC'])
+            ("Tidssone:", main_weather_info['timezone']['UTC'], comparison_weather_info['timezone']['UTC'])
         ]
     else:
         data = [
             ("Befolkning:", main_weather_info['population']),
             ("Land:", main_weather_info['country']),
-            ("Timezone:", main_weather_info['timezone']['UTC'])
+            ("Tidssone:", main_weather_info['timezone']['UTC'])
         ]
 
     # Configure grid layout for uniform spacing
