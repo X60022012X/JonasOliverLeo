@@ -40,8 +40,7 @@ def get_id(city, window):
 
     window.wait_variable(selected_id)
     #selected_id_tuple = ast.literal_eval(selected_id.get())
-    #print(selected_id_tuple)
-    return selected_id
+    return selected_id.get()
 
 info_font_size = 1
 
@@ -112,4 +111,48 @@ def info_box(window, main_city, comparison_city=None):
     info_frame.pack(side="right", anchor='ne', expand=True, padx=90, pady=10)
 
 def figure_frame(figures, window):
-    pass
+    current_index = 0
+    def next_index():
+        nonlocal current_index
+        current_index = (current_index + 1) % len(figures)
+
+    def prev_index():
+        nonlocal current_index
+        current_index = (current_index - 1) % len(figures)
+
+    def draw_graph(figure, canvas_frame):
+        for child in canvas_frame.winfo_children():
+            child.destroy()
+
+        canvas = FigureCanvasTkAgg(figure, master=canvas_frame)
+
+        canvas.draw()
+        canvas.get_tk_widget().pack()
+
+        toolbar = NavigationToolbar2Tk(canvas, master=canvas_frame)
+
+        toolbar.update()
+
+        canvas.get_tk_widget().pack()
+
+    graph_frame = tk.Frame(window)
+
+    canvas_frame = tk.Frame(graph_frame)
+    canvas_frame.pack(side='bottom', fill='both', expand=True)
+
+    next_graph_btn = tk.Button(graph_frame,
+                               text='Neste',
+                               command=lambda: (next_index(), draw_graph(figures[current_index], canvas_frame)))
+    next_graph_btn.pack(side='right',
+                        anchor='ne')
+    
+    prev_graph_btn = tk.Button(graph_frame,
+                               text='Forrige',
+                               command=lambda: (prev_index(), draw_graph(figures[current_index], canvas_frame)))
+    prev_graph_btn.pack(side='left',
+                        anchor='nw')
+
+    draw_graph(figures[current_index], canvas_frame)
+
+    graph_frame.pack(side='left',
+                     anchor='sw')
