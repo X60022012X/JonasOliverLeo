@@ -28,15 +28,15 @@ def get_data(city):
    
     response_forkast = requests.get(url_forkast)
     data_forkast = response_forkast.json()
-  
+
     return data_forkast
 
 
 
 
 
-def return_city_info(lat, lon):
-    forkast_data = get_data(lat, lon)
+def return_city_info(city):
+    forkast_data = get_data(city)
     weather_info = forkast_data.get("city", {}).copy()
 
 
@@ -70,8 +70,8 @@ def return_city_info(lat, lon):
 
 
 
-def return_city_weather_data(lat, lon):
-    forkast_data = get_data(lat, lon)
+def return_city_weather_data(city):
+    forkast_data = get_data(city)
 
     weather_data = {
       "clouds": [],
@@ -114,8 +114,8 @@ def return_city_weather_data(lat, lon):
 
 
 
-def return_weather_info_string(lat, lon):
-    weather_info = return_city_info(lat, lon)
+def return_weather_info_string(city):
+    weather_info = return_city_info(city)
 
     string =  "\n" + "* CITY INFO *" + "\n" + "-" * 35 + "\n"
     for key, value in weather_info.items():
@@ -133,8 +133,8 @@ def return_weather_info_string(lat, lon):
 
 
 
-def return_weather_data_string(lat, lon):
-    weather_data = return_city_weather_data(lat, lon)
+def return_weather_data_string(city):
+    weather_data = return_city_weather_data(city)
 
     string = "\n" + "* WEATHER DATA *" + "\n" + "-" * 120 + "\n"
     for key, value in weather_data.items():
