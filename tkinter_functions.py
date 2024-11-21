@@ -1,5 +1,5 @@
 import tkinter as tk
-from data_api import return_city_info, return_city_weather_data
+from data_api import return_city_info
 from direct_api import get_suggestion
 import ast
 from math import floor
@@ -28,8 +28,8 @@ def get_id(city, window):
                                width=20,
                                padx=10,
                                pady=10,
-                               command = lambda x=value: (selected_id.set(x),
-                                                          suggestion_frame.destroy()) #lagrer riktig id
+                               command = lambda x=value: (selected_id.set(x), #lagrer riktig id
+                                                          suggestion_frame.destroy()) #sletter forslag
         )
         suggestion.pack()
 
@@ -43,23 +43,29 @@ def get_id(city, window):
 
 info_font_size = 1
 
-def info_box(main_coordinates, comparison_coordinates, window):
+def info_box(window, main_coordinates, comparison_coordinates=None):
 
     # Create the frame to hold the information
     info_frame = tk.Frame(window, bg='lightgray')
     
-    # Fetch weather data (assuming return_weather_data is defined elsewhere)
+    # Fetch weather data 
     main_weather_info = return_city_info(main_coordinates[0], main_coordinates[1])
-    comparison_weather_info = return_city_info(comparison_coordinates[0], comparison_coordinates[1])
-    print('main:', main_weather_info)
-    print('comparison:', comparison_weather_info)
+    if comparison_coordinates:
+        comparison_weather_info = return_city_info(comparison_coordinates[0], comparison_coordinates[1])
 
     # Data (Rows for Population, Land, Timezone)
-    data = [
-        ("Population:", main_weather_info['population'], comparison_weather_info['population']),
-        ("Land:", main_weather_info['country'], comparison_weather_info['country']),
-        ("Timezone:", main_weather_info['timezone']['UTC'], comparison_weather_info['timezone']['UTC'])
-    ]
+    if comparison_coordinates:
+        data = [
+            ("Population:", main_weather_info['population'], comparison_weather_info['population']),
+            ("Land:", main_weather_info['country'], comparison_weather_info['country']),
+            ("Timezone:", main_weather_info['timezone']['UTC'], comparison_weather_info['timezone']['UTC'])
+        ]
+    else:
+        data = [
+            ("Population:", main_weather_info['population']),
+            ("Land:", main_weather_info['country']),
+            ("Timezone:", main_weather_info['timezone']['UTC'])
+        ]
 
     # Configure grid layout for uniform spacing
     for i in range(len(data)):
@@ -76,7 +82,12 @@ def info_box(main_coordinates, comparison_coordinates, window):
     info_title.grid(row=0, column=0, columnspan=3, sticky="nsew", pady=10)
     
     # Subheadings (Column titles)
-    columns = ["", main_weather_info['name'], comparison_weather_info['name']]
+    if comparison_coordinates:
+        columns = ["", main_weather_info['name'], comparison_weather_info['name']]
+    else:
+         columns = ["", main_weather_info['name']]
+
+
     for col, text in enumerate(columns):
         column_label = tk.Label(info_frame, 
                                 text=text, 

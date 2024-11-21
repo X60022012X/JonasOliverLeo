@@ -11,11 +11,25 @@ window_height = 650
 main_id = []
 comparison_id = []
 
+#refresh vindu funksjon
+def refresh_window():
+    global main_id, comparison_id
+    for child in window.winfo_children()[2:]: #sletter alle elementer bortsett fra refresh-knapp og input
+        child.destroy()
+    main_id = comparison_id
+    comparison_id = [] #nullstiller variabler
+
+#refresj-knapp
+refresh_btn = tk.Button(window,
+                        text='Refresh',
+                        command=refresh_window)
+refresh_btn.pack()
+
 #container til input for å midtstille
 input_container = tk.Frame(window)
 
 #main city widget
-main_city_input = tk.StringVar()
+main_city_input = tk.StringVar() #variabel for å hente input
 main_city_widget = tk.Entry(input_container, 
                             borderwidth=10, 
                             relief=tk.FLAT,
@@ -24,7 +38,7 @@ main_city_widget.insert(index=0, string='London')
 main_city_widget.pack(side="left")
 
 #comparison city widget
-comparison_city_input = tk.StringVar()
+comparison_city_input = tk.StringVar() #variabel for å hente input
 comparison_city_wigdet = tk.Entry(input_container,
                                   borderwidth=10,
                                   relief=tk.FLAT,
@@ -42,22 +56,21 @@ comparison_city_wigdet.bind("<Button-1>", erase_placeholder)
 
 #enter knapp funksjon
 def enter_btn_func():
-    global main_id
-    global comparison_id
-    main_id = get_id(main_city_input.get(), window)
-    comparison_id = get_id(comparison_city_input.get(), window)
-    info_box(main_id, comparison_id, window)
-    #print(main_id, comparison_id)
+    global main_id, comparison_id
+    main_id = get_id(main_city_input.get(), window) #sender inn bruker-input og får forslagsliste
+    #det brukeren trykker på blir main-id
+    if comparison_city_input.get() not in {'', ' ', '   '}:
+        comparison_id = get_id(comparison_city_input.get(), window)
+    info_box(window, main_id, comparison_id) #lager infobox med de id-ene
 
 #enter knapp
 enter_btn = tk.Button(input_container,
                       text='Enter',
                       command=enter_btn_func)
-enter_btn.pack(side="left")
+enter_btn.pack(side="left") #legger til knappen
 input_container.pack(side="left", anchor='nw', padx=10, pady=10)
 
-window.geometry(f"{window_width}x{window_height}")
-
+window.geometry(f"{window_width}x{window_height}") #bestemmer størrelse på vinduet
 
 #kjører vinduet
 window.mainloop()
