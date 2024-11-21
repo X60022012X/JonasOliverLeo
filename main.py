@@ -63,6 +63,7 @@ def enter_btn_func():
     if comparison_city_input.get() not in {'', ' ', '   '}:
         comparison_id = get_id(comparison_city_input.get(), window)
     #print('test', main_id)
+    print(main_id, comparison_id)
     info_box(window, main_id, comparison_id) #lager infobox med de id-ene
 
     #henter grafene til stedet, navn og id er parametre

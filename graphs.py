@@ -24,15 +24,15 @@ def create_and_return_graphs(main_name, comparison_name, main_id, comparison_id=
     Returnerer:
     - Liste av matplotlib-figurobjekter.
     """
-    lat1, lon1 = main_id
+    #lat1, lon1 = main_id
     # Hent værdata for første by
-    weather_data1 = return_city_weather_data(lat1, lon1)
+    weather_data1 = return_city_weather_data(main_id)
     time = format_time_labels(weather_data1['time'])
 
     # Sjekk om vi har en annen by for sammenlikning
     if comparison_id:
-        lat2, lon2 = comparison_id
-        weather_data2 = return_city_weather_data(lat2, lon2)
+        #lat2, lon2 = comparison_id
+        weather_data2 = return_city_weather_data(comparison_id)
 
     # Opprett figurer
     figures = []
