@@ -58,18 +58,27 @@ comparison_city_wigdet.bind("<Button-1>", erase_placeholder)
 #enter knapp funksjon
 def enter_btn_func():
     global main_id, comparison_id
-    main_id = get_id(main_city_input.get(), window) #sender inn bruker-input og får forslagsliste
-    #det brukeren trykker på blir main-id
+
+    main_id = get_id(main_city_input.get(), window) 
+    
+    # Hent ID for sammenligningsby hvis input ikke er tom
     if comparison_city_input.get() not in {'', ' ', '   '}:
         comparison_id = get_id(comparison_city_input.get(), window)
-    #print('test', main_id)
-    print(main_id, comparison_id)
-    info_box(window, main_id, comparison_id) #lager infobox med de id-ene
 
-    #henter grafene til stedet, navn og id er parametre
+    # Slett eksisterende info-boks før ny blir laget
+    for child in window.winfo_children():
+        if isinstance(child, tk.Frame) and child.cget('bg') == 'lightgray':  # Identifiser info-boks basert på bakgrunnsfarge
+            child.destroy()
+
+    # Opprett ny info-boks med oppdaterte ID-er
+    info_box(window, main_id, comparison_id)  
+
+    # Hent grafene til byene, navn og ID er parametere
     figures = create_and_return_graphs(main_city_input.get(), comparison_city_input.get(), main_id, comparison_id)
-    
+
+
     figure_frame(figures, window)
+
 
 #enter knapp
 enter_btn = tk.Button(input_container,
