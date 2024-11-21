@@ -1,5 +1,6 @@
 import tkinter as tk
-from tkinter_functions import get_id, info_box
+from tkinter_functions import get_id, info_box, figure_frame
+from graphs import create_and_return_graphs
 
 window = tk.Tk()
 window.title('Å være eller ikke være')
@@ -62,6 +63,15 @@ def enter_btn_func():
     if comparison_city_input.get() not in {'', ' ', '   '}:
         comparison_id = get_id(comparison_city_input.get(), window)
     info_box(window, main_id, comparison_id) #lager infobox med de id-ene
+
+    #henter grafene til stedet, navn og id er parametre
+    figures = create_and_return_graphs(main_city_input.get(), comparison_city_input.get(), main_id, comparison_id)
+    
+    figure_frame(figures, window)
+
+    # for fig in figures:
+    #     fig.show()
+    # plt.show()
 
 #enter knapp
 enter_btn = tk.Button(input_container,

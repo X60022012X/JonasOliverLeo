@@ -13,7 +13,7 @@ def format_time_labels(time_data):
         formatted_times.append(formatted_time)
     return formatted_times
 
-def create_and_return_graphs(main_id, comparison_id=None):
+def create_and_return_graphs(main_name, comparison_name, main_id, comparison_id=None):
     """
     Oppretter og returnerer fire vær-relaterte grafer med data fra en eller to steder.
 
@@ -39,12 +39,12 @@ def create_and_return_graphs(main_id, comparison_id=None):
 
     # Temperatur og følt temperatur graf
     fig1, ax1 = plt.subplots(figsize=(10, 6))
-    ax1.plot(time, weather_data1['temperature'], marker='o', markersize=4, color='r', linestyle='-', label="Temperature (City 1)")
-    ax1.plot(time, weather_data1['feels_like'], marker='o', markersize=4, color='r', linestyle='--', label="Feels Like (City 1)", alpha=0.7)
+    ax1.plot(time, weather_data1['temperature'], marker='o', markersize=4, color='r', linestyle='-', label=f"Temperatur, {main_name}")
+    ax1.plot(time, weather_data1['feels_like'], marker='o', markersize=4, color='r', linestyle='--', label=f"Føles som, {main_name}", alpha=0.7)
     
     if comparison_id:
-        ax1.plot(time, weather_data2['temperature'], marker='o', markersize=4, color='b', linestyle='-', label="Temperature (City 2)")
-        ax1.plot(time, weather_data2['feels_like'], marker='o', markersize=4, color='b', linestyle='--', label="Feels Like (City 2)", alpha=0.7)
+        ax1.plot(time, weather_data2['temperature'], marker='o', markersize=4, color='b', linestyle='-', label=f"Temperatur, {comparison_name}")
+        ax1.plot(time, weather_data2['feels_like'], marker='o', markersize=4, color='b', linestyle='--', label=f"Føles som, {comparison_name}", alpha=0.7)
 
     ax1.set_title("Temperature Over Time")
     ax1.set_xlabel("Time")
@@ -58,10 +58,10 @@ def create_and_return_graphs(main_id, comparison_id=None):
 
     # Fuktighet graf
     fig2, ax2 = plt.subplots(figsize=(10, 6))
-    ax2.plot(time, weather_data1['humidity'], marker='o', markersize=4, color='b', linestyle='-', label="Humidity (City 1)")
+    ax2.plot(time, weather_data1['humidity'], marker='o', markersize=4, color='b', linestyle='-', label=f"Luftfuktighet, {main_name}")
 
     if comparison_id:
-        ax2.plot(time, weather_data2['humidity'], marker='o', markersize=4, color='cyan', linestyle='-', label="Humidity (City 2)")
+        ax2.plot(time, weather_data2['humidity'], marker='o', markersize=4, color='cyan', linestyle='-', label=f"Luftfuktighet, {comparison_name}")
 
     ax2.set_title("Humidity Over Time")
     ax2.set_xlabel("Time")
@@ -75,10 +75,10 @@ def create_and_return_graphs(main_id, comparison_id=None):
 
     # Vindhastighet graf
     fig3, ax3 = plt.subplots(figsize=(10, 6))
-    ax3.plot(time, weather_data1['wind_speed'], marker='o', markersize=4, color='g', linestyle='-', label="Wind Speed (City 1)")
+    ax3.plot(time, weather_data1['wind_speed'], marker='o', markersize=4, color='g', linestyle='-', label=f"Vind, {main_name}")
 
     if comparison_id:
-        ax3.plot(time, weather_data2['wind_speed'], marker='o', markersize=4, color='lime', linestyle='-', label="Wind Speed (City 2)")
+        ax3.plot(time, weather_data2['wind_speed'], marker='o', markersize=4, color='lime', linestyle='-', label=f"Vind, {comparison_name}")
 
     ax3.set_title("Wind Speed Over Time")
     ax3.set_xlabel("Time")
@@ -92,10 +92,10 @@ def create_and_return_graphs(main_id, comparison_id=None):
 
     # Skydekke graf
     fig4, ax4 = plt.subplots(figsize=(10, 6))
-    ax4.plot(time, weather_data1['clouds'], marker='o', markersize=4, color='purple', linestyle='-', label="Cloud Coverage (City 1)")
+    ax4.plot(time, weather_data1['clouds'], marker='o', markersize=4, color='purple', linestyle='-', label=f"Skydekke, {main_name}")
 
     if comparison_id:
-        ax4.plot(time, weather_data2['clouds'], marker='o', markersize=4, color='magenta', linestyle='-', label="Cloud Coverage (City 2)")
+        ax4.plot(time, weather_data2['clouds'], marker='o', markersize=4, color='magenta', linestyle='-', label=f"Skydekke, {comparison_name}")
 
     ax4.set_title("Cloud Coverage Over Time")
     ax4.set_xlabel("Time")
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     comparison_id = (57.90, 11.22)  
 
     # Kaller graf-funksjonen
-    graphs = create_and_return_graphs(main_id, comparison_id)
+    graphs = create_and_return_graphs('navn1', 'navn2', main_id, comparison_id)
 
     # Viser hver graf i hvert sitt vindu
     for fig in graphs:

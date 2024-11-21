@@ -1,8 +1,10 @@
 import tkinter as tk
-from data_api import return_city_info
-from direct_api import get_suggestion
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 import ast
 from math import floor
+from data_api import return_city_info
+from direct_api import get_suggestion
 
 def get_id(city, window):
     #få dictionary av forslag fra API
@@ -22,13 +24,13 @@ def get_id(city, window):
     suggestion_question.pack()
 
     #lager selve knappene
-    for key, value in suggestions.items():
+    for key in suggestions.keys():
         suggestion = tk.Button(suggestion_frame,
                                text=key,
                                width=20,
                                padx=10,
                                pady=10,
-                               command = lambda x=value: (selected_id.set(x), #lagrer riktig id
+                               command = lambda x=key: (selected_id.set(x), #lagrer riktig id
                                                           suggestion_frame.destroy()) #sletter forslag
         )
         suggestion.pack()
@@ -37,24 +39,24 @@ def get_id(city, window):
     suggestion_frame.place(x=window.winfo_width()/2, y=window.winfo_height()/2-200, anchor='n')
 
     window.wait_variable(selected_id)
-    selected_id_tuple = ast.literal_eval(selected_id.get())
+    #selected_id_tuple = ast.literal_eval(selected_id.get())
     #print(selected_id_tuple)
-    return selected_id_tuple
+    return selected_id
 
 info_font_size = 1
 
-def info_box(window, main_coordinates, comparison_coordinates=None):
+def info_box(window, main_city, comparison_city=None):
 
     # Create the frame to hold the information
     info_frame = tk.Frame(window, bg='lightgray')
     
     # Fetch weather data 
-    main_weather_info = return_city_info(main_coordinates[0], main_coordinates[1])
-    if comparison_coordinates:
-        comparison_weather_info = return_city_info(comparison_coordinates[0], comparison_coordinates[1])
+    main_weather_info = return_city_info(main_city)
+    if comparison_city:
+        comparison_weather_info = return_city_info(comparison_city)
 
     # Data (Rows for Population, Land, Timezone)
-    if comparison_coordinates:
+    if comparison_city:
         data = [
             ("Population:", main_weather_info['population'], comparison_weather_info['population']),
             ("Land:", main_weather_info['country'], comparison_weather_info['country']),
@@ -82,7 +84,7 @@ def info_box(window, main_coordinates, comparison_coordinates=None):
     info_title.grid(row=0, column=0, columnspan=3, sticky="nsew", pady=10)
     
     # Subheadings (Column titles)
-    if comparison_coordinates:
+    if comparison_city:
         columns = ["", main_weather_info['name'], comparison_weather_info['name']]
     else:
          columns = ["", main_weather_info['name']]
@@ -108,3 +110,6 @@ def info_box(window, main_coordinates, comparison_coordinates=None):
     
     # Pack the frame to the right of the window
     info_frame.pack(side="right", anchor='ne', expand=True, padx=90, pady=10)
+
+def figure_frame(figures, window):
+    pass
