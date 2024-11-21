@@ -40,8 +40,7 @@ def get_id(city, window):
 
     window.wait_variable(selected_id)
     #selected_id_tuple = ast.literal_eval(selected_id.get())
-    #print(selected_id_tuple)
-    return selected_id
+    return selected_id.get()
 
 info_font_size = 1
 
