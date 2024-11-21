@@ -1,13 +1,30 @@
 import requests
+import pycountry
 from datetime import datetime
 
 
-def get_data(lat, lon):
+def get_data(city):
+    city_list = city.split(", ")
+    state_name = city_list[1]
+    country_code = city_list[2]
+
+    subdivisions = pycountry.subdivisions.get(country_code=country_code)
+    for sub in subdivisions:
+        if sub.name.lower() == state_name.lower():
+            state_code = sub.code.split('-')[1]
+
     api_key = "ba9b0f3ce4e121bee6ffb531794ec625"
     units = "metric"
     language = "en"
 
-    url_forkast = f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={api_key}&lang={language}&units={units}"
+
+    if not state_code:
+        url_forkast = f"https://api.openweathermap.org/data/2.5/forecast?q={city_list[0]},{city_list[2]}&appid={api_key}&lang={language}&units={units}"
+    else:
+        try:
+            url_forkast = f"https://api.openweathermap.org/data/2.5/forecast?q={city_list[0]},{state_code},{city_list[2]}&appid={api_key}&lang={language}&units={units}"
+        except:
+            url_forkast = f"https://api.openweathermap.org/data/2.5/forecast?q={city_list[0]},{city_list[2]}&appid={api_key}&lang={language}&units={units}"
    
     response_forkast = requests.get(url_forkast)
     data_forkast = response_forkast.json()
