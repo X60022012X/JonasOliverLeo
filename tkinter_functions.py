@@ -57,13 +57,13 @@ def info_box(window, main_city, comparison_city=None):
     # Data (Rows for Population, Land, Timezone)
     if comparison_city:
         data = [
-            ("Population:", main_weather_info['population'], comparison_weather_info['population']),
+            ("Befolkning:", main_weather_info['population'], comparison_weather_info['population']),
             ("Land:", main_weather_info['country'], comparison_weather_info['country']),
             ("Timezone:", main_weather_info['timezone']['UTC'], comparison_weather_info['timezone']['UTC'])
         ]
     else:
         data = [
-            ("Population:", main_weather_info['population']),
+            ("Befolkning:", main_weather_info['population']),
             ("Land:", main_weather_info['country']),
             ("Timezone:", main_weather_info['timezone']['UTC'])
         ]
