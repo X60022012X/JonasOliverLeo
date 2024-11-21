@@ -49,9 +49,9 @@ def create_and_return_graphs(main_name, comparison_name, main_id, comparison_id=
         ax1.plot(time, weather_data2['temperature'], marker='o', markersize=4, color='b', linestyle='-', label=f"Temperatur, {comparison_name}")
         ax1.plot(time, weather_data2['feels_like'], marker='o', markersize=4, color='b', linestyle='--', label=f"Føles som, {comparison_name}", alpha=0.7)
 
-    ax1.set_title("Temperature Over Time")
-    ax1.set_xlabel("Time")
-    ax1.set_ylabel("Temperature (°C)")
+    ax1.set_title("Temperatur over tid")
+    ax1.set_xlabel("Tid")
+    ax1.set_ylabel("Temperatur (°C)")
     ax1.tick_params(axis='x', rotation=-45)
     ax1.set_xticks(time[::3])  
     ax1.set_xticklabels(time[::3], ha='left') 
@@ -66,9 +66,9 @@ def create_and_return_graphs(main_name, comparison_name, main_id, comparison_id=
     if comparison_id:
         ax2.plot(time, weather_data2['humidity'], marker='o', markersize=4, color='cyan', linestyle='-', label=f"Luftfuktighet, {comparison_name}")
 
-    ax2.set_title("Humidity Over Time")
-    ax2.set_xlabel("Time")
-    ax2.set_ylabel("Humidity (%)")
+    ax2.set_title("Fuktighet over tid")
+    ax2.set_xlabel("Tid")
+    ax2.set_ylabel("Fuktighet (%)")
     ax2.tick_params(axis='x', rotation=-45)
     ax2.set_xticks(time[::3])  
     ax2.set_xticklabels(time[::3], ha='left')  
@@ -83,9 +83,9 @@ def create_and_return_graphs(main_name, comparison_name, main_id, comparison_id=
     if comparison_id:
         ax3.plot(time, weather_data2['wind_speed'], marker='o', markersize=4, color='lime', linestyle='-', label=f"Vind, {comparison_name}")
 
-    ax3.set_title("Wind Speed Over Time")
-    ax3.set_xlabel("Time")
-    ax3.set_ylabel("Wind Speed (m/s)")
+    ax3.set_title("Vind over tid")
+    ax3.set_xlabel("Tid")
+    ax3.set_ylabel("Vind (m/s)")
     ax3.tick_params(axis='x', rotation=-45)
     ax3.set_xticks(time[::3])  
     ax3.set_xticklabels(time[::3], ha='left')  
@@ -100,9 +100,9 @@ def create_and_return_graphs(main_name, comparison_name, main_id, comparison_id=
     if comparison_id:
         ax4.plot(time, weather_data2['clouds'], marker='o', markersize=4, color='magenta', linestyle='-', label=f"Skydekke, {comparison_name}")
 
-    ax4.set_title("Cloud Coverage Over Time")
-    ax4.set_xlabel("Time")
-    ax4.set_ylabel("Cloud Coverage (%)")
+    ax4.set_title("Skydekke over tid")
+    ax4.set_xlabel("Tid")
+    ax4.set_ylabel("Skydekke (%)")
     ax4.tick_params(axis='x', rotation=-45)
     ax4.set_xticks(time[::3])  
     ax4.set_xticklabels(time[::3], ha='left') 

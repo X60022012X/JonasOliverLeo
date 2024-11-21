@@ -35,7 +35,7 @@ main_city_widget = tk.Entry(input_container,
                             borderwidth=10, 
                             relief=tk.FLAT,
                             textvariable=main_city_input)
-main_city_widget.insert(index=0, string='London')
+main_city_widget.insert(index=0, string='Hovedby')
 main_city_widget.pack(side="left")
 
 #comparison city widget
@@ -44,7 +44,7 @@ comparison_city_wigdet = tk.Entry(input_container,
                                   borderwidth=10,
                                   relief=tk.FLAT,
                                   textvariable=comparison_city_input)
-comparison_city_wigdet.insert(index=0, string='Houston')
+comparison_city_wigdet.insert(index=0, string='By å sammenlikne med')
 comparison_city_wigdet.pack(side="left")
 
 
