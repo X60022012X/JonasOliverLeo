@@ -5,8 +5,10 @@ from datetime import datetime
 
 def get_data(city):
     city_list = city.split(", ")
-    state_name = city_list[1]
-    country_code = city_list[2]
+    state_name = city_list[0]
+    state_code = None
+    country_code = city_list[-1]
+ 
 
     subdivisions = pycountry.subdivisions.get(country_code=country_code)
     for sub in subdivisions:
@@ -19,16 +21,16 @@ def get_data(city):
 
 
     if not state_code:
-        url_forkast = f"https://api.openweathermap.org/data/2.5/forecast?q={city_list[0]},{city_list[1]}&appid={api_key}&lang={language}&units={units}"
+        url_forkast = f"https://api.openweathermap.org/data/2.5/forecast?q={state_name},{country_code}&appid={api_key}&lang={language}&units={units}"
     else:
         try:
-            url_forkast = f"https://api.openweathermap.org/data/2.5/forecast?q={city_list[0]},{state_code},{city_list[2]}&appid={api_key}&lang={language}&units={units}"
+            url_forkast = f"https://api.openweathermap.org/data/2.5/forecast?q={state_name},{state_code},{country_code}&appid={api_key}&lang={language}&units={units}"
         except:
-            url_forkast = f"https://api.openweathermap.org/data/2.5/forecast?q={city_list[0]},{city_list[1]}&appid={api_key}&lang={language}&units={units}"
+            url_forkast = f"https://api.openweathermap.org/data/2.5/forecast?q={state_name},{country_code}&appid={api_key}&lang={language}&units={units}"
    
     response_forkast = requests.get(url_forkast)
     data_forkast = response_forkast.json()
-
+    
     return data_forkast
 
 
