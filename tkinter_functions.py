@@ -46,15 +46,15 @@ info_font_size = 1
 
 def info_box(window, main_city, comparison_city=None):
 
-    # Create the frame to hold the information
+    # lager info frame
     info_frame = tk.Frame(window, bg='lightgray')
     
-    # Fetch weather data 
+    # henter værdata
     main_weather_info = return_city_info(main_city)
     if comparison_city:
         comparison_weather_info = return_city_info(comparison_city)
 
-    # Data (Rows for Population, Land, Timezone)
+    # Data (Rader for populasjon, land, tidssone)
     if comparison_city:
         data = [
             ("Befolkning:", main_weather_info['population'], comparison_weather_info['population']),
@@ -68,13 +68,13 @@ def info_box(window, main_city, comparison_city=None):
             ("Tidssone:", main_weather_info['timezone']['UTC'])
         ]
 
-    # Configure grid layout for uniform spacing
+    # lager grid layout for strukturert oversikt
     for i in range(len(data)):
         info_frame.columnconfigure(i, weight=1)
-    for i in range(4):  # Adjust for rows (including headers and data rows)
+    for i in range(4):  # kan tilpasses for antall rader
         info_frame.rowconfigure(i, weight=1)
     
-    # Header (Information)
+    # Lager overskrit
     info_title = tk.Label(info_frame, 
                           text='Informasjon', 
                           font=f'Arial {floor(20*info_font_size)} bold', 
@@ -82,7 +82,7 @@ def info_box(window, main_city, comparison_city=None):
                           anchor="center")
     info_title.grid(row=0, column=0, columnspan=3, sticky="nsew", pady=10)
     
-    # Subheadings (Column titles)
+    # Lager kolonne titler
     if comparison_city:
         columns = ["", main_weather_info['name'], comparison_weather_info['name']]
     else:
@@ -107,7 +107,7 @@ def info_box(window, main_city, comparison_city=None):
                                   anchor="center")
             data_label.grid(row=row_idx, column=col_idx, sticky="nsew", padx=5, pady=5)
     
-    # Pack the frame to the right of the window
+    # Legger til info frame i hoved-vinduet
     info_frame.pack(side="right", anchor='ne', expand=True, padx=90, pady=10)
 
 
@@ -116,6 +116,7 @@ def info_box(window, main_city, comparison_city=None):
 
 def figure_frame(figures, window):
     current_index = 0
+    #bytter index for figurer
     def next_index():
         nonlocal current_index
         current_index = (current_index + 1) % len(figures)
@@ -124,13 +125,15 @@ def figure_frame(figures, window):
         nonlocal current_index
         current_index = (current_index - 1) % len(figures)
 
-    graph_frame = tk.Frame(window, width=800, height=600, bg='black')  # Width and height can be adjusted
+    #lager frame for grafer
+    graph_frame = tk.Frame(window, width=800, height=600, bg='black')  # lengde og bredde kan variere
     graph_frame.pack()
     graph_frame.place(x=5, y=130)
 
     canvas_frame = tk.Frame(graph_frame)
     canvas_frame.pack(side='bottom', fill='both', expand=True)
 
+    #tegner grafen
     def draw_graph(figure, canvas_frame):
         for child in canvas_frame.winfo_children():
             child.destroy()
