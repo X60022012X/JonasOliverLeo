@@ -15,7 +15,7 @@ comparison_id = []
 #refresh vindu funksjon
 def refresh_window():
     global main_id, comparison_id
-    for child in window.winfo_children()[2:]: #sletter alle elementer bortsett fra refresh-knapp og input
+    for child in window.winfo_children()[1:]: #sletter alle elementer bortsett fra refresh-knapp og input
         child.destroy()
     main_id = comparison_id
     comparison_id = [] #nullstiller variabler
