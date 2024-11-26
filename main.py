@@ -57,6 +57,8 @@ comparison_city_wigdet.bind("<Button-1>", erase_placeholder)
 
 #enter knapp funksjon
 def enter_btn_func():
+    refresh_window()
+
     global main_id, comparison_id
 
     main_id = get_id(main_city_input.get(), window) 
