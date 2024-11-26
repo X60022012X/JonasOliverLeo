@@ -20,11 +20,7 @@ def refresh_window():
     main_id = comparison_id
     comparison_id = [] #nullstiller variabler
 
-#refresj-knapp
-refresh_btn = tk.Button(window,
-                        text='Refresh',
-                        command=refresh_window)
-refresh_btn.pack()
+
 
 #container til input for å midtstille
 input_container = tk.Frame(window)
