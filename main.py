@@ -60,7 +60,7 @@ def enter_btn_func():
     main_id = get_id(main_city_input.get(), window) 
     
     # Hent ID for sammenligningsby hvis input ikke er tom
-    if comparison_city_input.get() not in {'', ' ', '   '}:
+    if comparison_city_input.get().strip() not in {'', 'By å sammenlikne med'}:
         comparison_id = get_id(comparison_city_input.get(), window)
 
     # Slett eksisterende info-boks før ny blir laget
