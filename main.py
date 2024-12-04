@@ -20,6 +20,17 @@ def refresh_window():
     main_id = comparison_id
     comparison_id = [] #nullstiller variabler
 
+def error_function(error_type):
+    refresh_window()
+    error_message = tk.Label(window,
+                             text=f'Ånei, noe gikk galt.\nDette gikk galt: {error_type}.\nDet skyldes antagelig manglende data fra vår levrandør.\nPrøv igjen med et annet sted.',
+                             bg='red',
+                             padx=100,
+                             pady=100,
+                             font='Arial 30',
+                             fg='white')
+    error_message.pack()
+    error_message.place(relx=0.5, rely=0.5, anchor='center')
 
 
 #container til input for å midtstille
@@ -31,7 +42,7 @@ main_city_widget = tk.Entry(input_container,
                             borderwidth=10, 
                             relief=tk.FLAT,
                             textvariable=main_city_input)
-main_city_widget.insert(index=0, string='Hovedby')
+main_city_widget.insert(index=0, string='Jan Mayen')
 main_city_widget.pack(side="left")
 
 #comparison city widget
@@ -40,7 +51,7 @@ comparison_city_wigdet = tk.Entry(input_container,
                                   borderwidth=10,
                                   relief=tk.FLAT,
                                   textvariable=comparison_city_input)
-comparison_city_wigdet.insert(index=0, string='By å sammenlikne med')
+comparison_city_wigdet.insert(index=0, string='Oslo')
 comparison_city_wigdet.pack(side="left")
 
 
@@ -69,7 +80,13 @@ def enter_btn_func():
             child.destroy()
 
     # Opprett ny info-boks med oppdaterte ID-er
-    info_box(window, main_id, comparison_id)  
+    try:
+        info_box(window, main_id, comparison_id)  
+    except Exception as error:
+        refresh_window()
+        print(error)
+        error_function(error)
+        return
 
     # Hent grafene til byene, navn og ID er parametere
     figures = create_and_return_graphs(main_city_input.get(), comparison_city_input.get(), main_id, comparison_id)
