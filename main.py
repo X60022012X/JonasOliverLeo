@@ -23,7 +23,7 @@ def refresh_window():
 def error_function(error_type):
     refresh_window()
     error_message = tk.Label(window,
-                             text=f'Ånei, noe gikk galt.\nDette gikk galt: {error_type}.\nDet skyldes antagelig manglende data fra vår levrandør.\nPrøv igjen med et annet sted.',
+                             text=f'Ånei, noe gikk galt.\nDette gikk galt: {error_type}.\nDet skyldes antagelig manglende data fra vår leverandør.\nPrøv igjen med et annet sted.',
                              bg='red',
                              padx=100,
                              pady=100,
