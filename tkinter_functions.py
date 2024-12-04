@@ -12,6 +12,8 @@ def get_id(city, window):
     #sender navn, får to koordinater
 
     suggestions = get_suggestion(city)
+    if len(suggestions) == 0:
+        return False
 
     selected_id = tk.StringVar()
 

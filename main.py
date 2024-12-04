@@ -68,11 +68,17 @@ def enter_btn_func():
 
     global main_id, comparison_id
 
-    main_id = get_id(main_city_input.get(), window) 
+    main_id = get_id(main_city_input.get(), window)
+    if main_id == False:
+        error_function('Fant ikke byen')
+        return
     
     # Hent ID for sammenligningsby hvis input ikke er tom
     if comparison_city_input.get().strip() not in {'', 'By å sammenlikne med'}:
         comparison_id = get_id(comparison_city_input.get(), window)
+        if comparison_id == False:
+            error_function('Fant ikke byen')
+            return
 
     # Slett eksisterende info-boks før ny blir laget
     for child in window.winfo_children():
